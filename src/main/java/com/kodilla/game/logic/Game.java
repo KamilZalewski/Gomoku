@@ -1,8 +1,17 @@
 package com.kodilla.game.logic;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 public class Game {
+    private final GridPane grid;
     private PlayerColor whoseMove = PlayerColor.WHITE;
     private Board board = new Board();
+
+    public Game(GridPane grid) {
+        this.grid = grid;
+    }
 
     public void play(){
         System.out.println(board);
@@ -94,4 +103,19 @@ public class Game {
         return result;
     }
 
+    public void display() {
+        board.setFigure(3,3,new Pawn(PlayerColor.WHITE));
+        board.setFigure(7,7,new Pawn(PlayerColor.BLACK));
+        grid.getChildren().clear();
+        for(int col = 0; col < 15; col++){
+            for(int row = 0; row < 15; row++){
+                Figure figure = board.getFigure(col, row);
+                if (figure instanceof Pawn){
+                    Circle circle = new Circle(15);
+                    circle.setFill(figure.getColor() == PlayerColor.WHITE ? Color.YELLOW:Color.BLACK);
+                    grid.add(circle,col,row);
+                }
+            }
+        }
+    }
 }
