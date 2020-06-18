@@ -37,29 +37,14 @@ public class Game {
             } else {
                 whoseMove = PlayerColor.WHITE;
             }
-            if (isWinner(PlayerColor.WHITE))
+            if (isWinner(PlayerColor.WHITE)){
                 System.out.println("White is a winner.");
-                Stage window = new Stage();
-                window.initModality(Modality.APPLICATION_MODAL);
-                window.setTitle("Game Over!");
-                window.setMinWidth(250);
-                Label label = new Label();
-                label.setText(PlayerColor.WHITE + " is a Winner!\n Congratulations!");
-                Button newGameButton = new Button("New Game");
-                newGameButton.setOnAction(e ->
-                        window.close());
-                Button endGameButton = new Button("End Game");
-                endGameButton.setOnAction(e ->
-                        window.close());
-                VBox layout = new VBox(10);
-                layout.getChildren().addAll(label, newGameButton, endGameButton);
-                layout.setAlignment(Pos.CENTER);
-                Scene scene = new Scene(layout);
-                window.setScene(scene);
-                window.show();
+                endGame(PlayerColor.WHITE);
+
+            }
             if (isWinner(PlayerColor.BLACK))
                 System.out.println("Black is a winner.");
-
+                endGame(PlayerColor.BLACK);
 
         }
     }
@@ -139,10 +124,31 @@ public class Game {
                 Figure figure = board.getFigure(col, row);
                 if (figure instanceof Pawn){
                     Circle circle = new Circle(15);
-                    circle.setFill(figure.getColor() == PlayerColor.WHITE ? Color.YELLOW:Color.BLACK);
+                    circle.setFill(figure.getColor() == PlayerColor.WHITE ? Color.WHITE:Color.BLACK);
                     grid.add(circle,col,row);
                 }
             }
         }
+    }
+
+    public void endGame(PlayerColor playerColor){
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Game Over!");
+        window.setMinWidth(250);
+        Label label = new Label();
+        label.setText(playerColor + " is a Winner!\n Congratulations!");
+        Button newGameButton = new Button("New Game");
+        newGameButton.setOnAction(e ->
+                window.close());
+        Button endGameButton = new Button("End Game");
+        endGameButton.setOnAction(e ->
+                window.close());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, newGameButton, endGameButton);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.show();
     }
 }
