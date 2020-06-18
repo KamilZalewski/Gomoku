@@ -40,12 +40,11 @@ public class Game {
             if (isWinner(PlayerColor.WHITE)){
                 System.out.println("White is a winner.");
                 endGame(PlayerColor.WHITE);
-
             }
-            if (isWinner(PlayerColor.BLACK))
+            if (isWinner(PlayerColor.BLACK)) {
                 System.out.println("Black is a winner.");
                 endGame(PlayerColor.BLACK);
-
+            }
         }
     }
 
@@ -139,8 +138,11 @@ public class Game {
         Label label = new Label();
         label.setText(playerColor + " is a Winner!\n Congratulations!");
         Button newGameButton = new Button("New Game");
-        newGameButton.setOnAction(e ->
-                window.close());
+        newGameButton.setOnAction(e -> {
+                    window.close();
+                    display();
+                });
+
         Button endGameButton = new Button("End Game");
         endGameButton.setOnAction(e ->
                 window.close());
